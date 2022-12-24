@@ -1634,39 +1634,39 @@ setMethod("peakStat", signature(para = "metaXpara",plsdaPara = "plsDAPara"),
                   
                   
                   ## The venn plot of significant metabolites defined by different methods
-                  ##venn.fig <- paste(para@outdir,"/",para@prefix,"-",rp,
-                  ##                  "-sigMetaboliteVenn.tiff",sep="")
-                  ##venn.fig <- gsub(pattern = ":",replacement = "VS",x=venn.fig)
+                  venn.fig <- paste(para@outdir,"/",para@prefix,"-",rp,
+                                    "-sigMetaboliteVenn.tiff",sep="")
+                  venn.fig <- gsub(pattern = ":",replacement = "VS",x=venn.fig)
                   ## maybe there are negative value
-                  ##tmp <- statTest[ isValid(statTest$ratio),]
-                  ##sigA <- tmp$ID[ abs(log2(tmp$ratio)) >= log2(1.5) & 
-                  ##                    tmp$t.test_p.value_BHcorrect <= 0.05 ]
+                  tmp <- statTest[ isValid(statTest$ratio),]
+                  sigA <- tmp$ID[ abs(log2(tmp$ratio)) >= log2(1.5) & 
+                                      tmp$t.test_p.value_BHcorrect <= 0.05 ]
 
-                  ##sigB <- tmp$ID[ abs(log2(tmp$ratio)) >= log2(1.5) & 
-                  ##                    tmp$wilcox.test_p.value_BHcorrect <= 0.05]
+                  sigB <- tmp$ID[ abs(log2(tmp$ratio)) >= log2(1.5) & 
+                                      tmp$wilcox.test_p.value_BHcorrect <= 0.05]
 		  
-                  ##if(plsdaPara@do==TRUE){
-                  ##    sigC <- tmp$ID[ tmp$VIP >=1 ]
-		  ##    message(table(is.na(sigC)))
-                  ##    venn.data <- list("t.test"=sigA,"wilcox.test"=sigB,"VIP"=sigC)
-                  ##    VennDiagram::venn.diagram(x = venn.data,
-                  ##                              filename = venn.fig,col = "transparent",
-                  ##                              fill = c("cornflowerblue", "green", "yellow"),
-                  ##                              alpha = 0.50,
-                  ##                              label.col = "black",
-                  ##                              cat.col=c("darkblue","darkgreen","darkgreen"))
-                  ##}else{
-                  ##    venn.data <- list("t.test"=sigA,"wilcox.test"=sigB)
-                  ##    if(length(venn.data$t.test)!=0 || length(venn.data$wilcox.test)!=0){
-                  ##        VennDiagram::venn.diagram(x = venn.data,
-                  ##                                   filename = venn.fig,col = "transparent",
-                  ##                                   fill = c("cornflowerblue", "green"),
-                  ##                                  label.col = "black",
-                  ##                                  cat.col=c("darkblue","darkgreen"))
-                  ##    }
-                  ##}
+                  if(plsdaPara@do==TRUE){
+                      sigC <- tmp$ID[ tmp$VIP >=1 ]
+		      message(table(is.na(sigC)))
+                      venn.data <- list("t.test"=sigA,"wilcox.test"=sigB,"VIP"=sigC)
+                      VennDiagram::venn.diagram(x = venn.data,
+                                                filename = venn.fig,col = "transparent",
+                                                fill = c("cornflowerblue", "green", "yellow"),
+                                                alpha = 0.50,
+                                                label.col = "black",
+                                                cat.col=c("darkblue","darkgreen","darkgreen"))
+                  }else{
+                      venn.data <- list("t.test"=sigA,"wilcox.test"=sigB)
+                      if(length(venn.data$t.test)!=0 || length(venn.data$wilcox.test)!=0){
+                          VennDiagram::venn.diagram(x = venn.data,
+                                                     filename = venn.fig,col = "transparent",
+                                                     fill = c("cornflowerblue", "green"),
+                                                    label.col = "black",
+                                                    cat.col=c("darkblue","darkgreen"))
+                      }
+                  }
                   
-                  ## return value
+                   return value
                   statTest
               })
               statResult <- do.call(rbind,statResult)
