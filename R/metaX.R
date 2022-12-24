@@ -1666,7 +1666,7 @@ setMethod("peakStat", signature(para = "metaXpara",plsdaPara = "plsDAPara"),
                       }
                   }
                   
-                   return value
+                   #return value
                   statTest
               })
               statResult <- do.call(rbind,statResult)
