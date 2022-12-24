@@ -1664,7 +1664,7 @@ setMethod("peakStat", signature(para = "metaXpara",plsdaPara = "plsDAPara"),
                   ##                                  label.col = "black",
                   ##                                  cat.col=c("darkblue","darkgreen"))
                   ##    }
-                  }
+                  ##}
                   
                   ## return value
                   statTest
