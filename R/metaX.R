@@ -1641,10 +1641,13 @@ setMethod("peakStat", signature(para = "metaXpara",plsdaPara = "plsDAPara"),
                   tmp <- statTest[ isValid(statTest$ratio),]
                   sigA <- tmp$ID[ abs(log2(tmp$ratio)) >= log2(1.5) & 
                                       tmp$t.test_p.value_BHcorrect <= 0.05 ]
+		  table(is.na(sigA))
                   sigB <- tmp$ID[ abs(log2(tmp$ratio)) >= log2(1.5) & 
                                       tmp$wilcox.test_p.value_BHcorrect <= 0.05]
+		  table(is.na(sigB))
                   if(plsdaPara@do==TRUE){
                       sigC <- tmp$ID[ tmp$VIP >=1 ]
+		      table(is.na(sigC))
                       venn.data <- list("t.test"=sigA,"wilcox.test"=sigB,"VIP"=sigC)
                       VennDiagram::venn.diagram(x = venn.data,
                                                 filename = venn.fig,col = "transparent",
