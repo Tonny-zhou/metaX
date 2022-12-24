@@ -68,7 +68,7 @@ runPLSDA=function(para,plsdaPara,auc=TRUE,sample=NULL,valueID="valueNorm",
     outdir <- para@outdir
     prefix <- para@prefix
     result <- list()
-    
+    para@peaksData <- para@peaksData %>% filter(class %in% sample) #extract group-specific peaksdata before data preprocess
     ###########################################################################
     ## data preprocess
     ## step 1: Data transformation
